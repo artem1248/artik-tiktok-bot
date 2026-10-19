@@ -75,9 +75,12 @@ const server = http.createServer((req, res) => {
   }
 
   if (req.headers["x-telegram-bot-api-secret-token"] !== webhookSecret) {
-    res.writeHead(403);
-    return res.end("Forbidden");
-  }
+  console.log("Webhook rejected: secret mismatch");
+  res.writeHead(403);
+  return res.end("Forbidden");
+}
+
+console.log("Webhook request accepted");
 
   let body = "";
   req.on("data", chunk => {
