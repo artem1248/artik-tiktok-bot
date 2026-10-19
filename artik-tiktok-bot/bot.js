@@ -87,7 +87,9 @@ const server = http.createServer((req, res) => {
 
   req.on("end", async () => {
     try {
-      await bot.handleUpdate(JSON.parse(body));
+    const update = JSON.parse(body);
+console.log("Telegram update received:", JSON.stringify(update));
+     await bot.handleUpdate(update);
       res.writeHead(200);
       res.end("OK");
     } catch (err) {
